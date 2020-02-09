@@ -3,13 +3,13 @@ sudo: required
 services:
   - docker
 
-before-install:
+before_install:
   - docker build -t tkonuklar/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true tkonuklar/react-test npm run test
 
-after-success:
+after_success:
   - docker build -t tkonuklar/multi-client ./client
   - docker build -t tkonuklar/multi-server ./server
   - docker build -t tkonuklar/multi-worker ./worker
