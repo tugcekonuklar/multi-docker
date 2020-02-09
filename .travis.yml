@@ -1,0 +1,38 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before-install:
+  - docker build -t tkonuklar/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true tkonuklar/react-test npm run test
+
+after-success:
+  - docker build -t tkonuklar/multi-client ./client
+  - docker build -t tkonuklar/multi-server ./server
+  - docker build -t tkonuklar/multi-worker ./worker
+  - docker build -t tkonuklar/multi-nginx ./nginx
+
+# Login to the docker CLI
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+- docker push tkonuklar/multi-client
+- docker push tkonuklar/multi-server
+- docker push tkonuklar/multi-worker
+- docker push tkonuklar/multi-nginx
+# Take those images and push them to the docker hub
+
+
+# deploy:
+#   edge: true
+#   provider: elasticbeanstalk
+#   region: "us-east-1"
+#   app: "multi-docker"
+#   env: "MultiDocker-env"
+#   bucket_name: ""
+#   bucket_path: ""
+#   on:
+#     branch: master
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
