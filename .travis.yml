@@ -14,13 +14,12 @@ after_success:
   - docker build -t tkonuklar/multi-server ./server
   - docker build -t tkonuklar/multi-worker ./worker
   - docker build -t tkonuklar/multi-nginx ./nginx
-
 # Login to the docker CLI
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-- docker push tkonuklar/multi-client
-- docker push tkonuklar/multi-server
-- docker push tkonuklar/multi-worker
-- docker push tkonuklar/multi-nginx
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push tkonuklar/multi-client
+  - docker push tkonuklar/multi-server
+  - docker push tkonuklar/multi-worker
+  - docker push tkonuklar/multi-nginx
 # Take those images and push them to the docker hub
 
 
