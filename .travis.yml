@@ -23,15 +23,15 @@ after_success:
 # Take those images and push them to the docker hub
 
 
-# deploy:
-#   edge: true
-#   provider: elasticbeanstalk
-#   region: "us-east-1"
-#   app: "multi-docker"
-#   env: "MultiDocker-env"
-#   bucket_name: ""
-#   bucket_path: ""
-#   on:
-#     branch: master
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_KEY
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-us-east-1-684975642541"
+  bucket_path: "docker-multi"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
