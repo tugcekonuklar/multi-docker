@@ -5,7 +5,7 @@
 			"image": "tkonuklar/multi-client",
 			"hostname": "client",
 			"essential": false,
-            "memory": 512
+            "memory": 128
 		},
 		{
 			"name": "server",
